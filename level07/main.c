@@ -1,56 +1,106 @@
-int main(void) {
-   char buf[100];
-   char input[20];
+//----- (08048630) --------------------------------------------------------
+int __cdecl store_number(int a1)
+{
+  unsigned int unum; // [esp+18h] [ebp-10h]
+  unsigned int v3; // [esp+1Ch] [ebp-Ch]
 
-   bzero(input, 20);
-   bzero(buf, 100);
-   puts("----------------------------------------------------\n");
-   puts("  Welcome to wil\'s crappy number storage service!  \n");
-   puts("----------------------------------------------------\n");
-   puts(" Commands:                                          \n");
-   puts("    store - store a number into the data storage    \n");
-   puts("    read  - read a number from the data storage     \n");
-   puts("    quit  - exit the program                        \n");
-   puts("----------------------------------------------------\n");
-   puts("   wil has reserved some storage :>                 \n");
-   puts("----------------------------------------------------\n");
-   do {
-      printf("Input command: ");
-      fgets(input, 20, stdin);
-   }
+  printf(" Number: ");
+  unum = get_unum();
+  printf(" Index: ");
+  v3 = get_unum();
+  if ( v3 == 3 * (v3 / 3) || HIBYTE(unum) == 183 )
+  {
+    puts(" *** ERROR! ***");
+    puts("   This index is reserved for wil!");
+    puts(" *** ERROR! ***");
+    return 1;
+  }
+  else
+  {
+    *(_DWORD *)(a1 + 4 * v3) = unum;
+    return 0;
+  }
 }
 
-void read_number(char *buf) {
-   uint index;
-   
-   printf("Index: ");
-   index = get_unum();
-   printf(" Number at data[%u] is %u\n", index, buf[index * 4]);
+//----- (080486D7) --------------------------------------------------------
+int __cdecl read_number(int a1)
+{
+  int unum; // [esp+1Ch] [ebp-Ch]
+
+  printf(" Index: ");
+  unum = get_unum();
+  printf(" Number at data[%u] is %u\n", unum, *(_DWORD *)(a1 + 4 * unum));
+  return 0;
 }
 
-void store_number(char *buf) {
-   uint index;
-   uint number;
+//----- (08048723) --------------------------------------------------------
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  _BYTE v6[400]; // [esp+24h] [ebp-1B8h] BYREF
+  int number; // [esp+1B4h] [ebp-28h]
+  char s[4]; // [esp+1B8h] [ebp-24h] BYREF
+  int v9; // [esp+1BCh] [ebp-20h]
+  int v10; // [esp+1C0h] [ebp-1Ch]
+  int v11; // [esp+1C4h] [ebp-18h]
+  int v12; // [esp+1C8h] [ebp-14h]
+  unsigned int v13; // [esp+1CCh] [ebp-10h]
 
-   printf(" Number: ");
-   number = get_unum();
-   printf(" Index: ");
-   index = get_unum();
-   if (index % 3 == 0 || number >> 24 == 0xb7) {
-      puts(" *** ERROR! ***");
-      puts("   This index is reserved for wil!");
-      puts(" *** ERROR! ***");
-      return 1;
-   }
-   *(uint *)(buf + index * 4) = number;
-   return 0;
-}
-
-uint get_unum(void) {
-   uint number_p[1];
-
-   *number = 0;
-   fflush(stdout);
-   scanf("%u", number_p);
-   return *number;
+  v13 = __readgsdword(0x14u);
+  number = 0;
+  *(_DWORD *)s = 0;
+  v9 = 0;
+  v10 = 0;
+  v11 = 0;
+  v12 = 0;
+  memset(v6, 0, sizeof(v6));
+  while ( *argv )
+  {
+    memset((void *)*argv, 0, strlen(*argv));
+    ++argv;
+  }
+  while ( *envp )
+  {
+    memset((void *)*envp, 0, strlen(*envp));
+    ++envp;
+  }
+  puts(
+    "----------------------------------------------------\n"
+    "  Welcome to wil's crappy number storage service!   \n"
+    "----------------------------------------------------\n"
+    " Commands:                                          \n"
+    "    store - store a number into the data storage    \n"
+    "    read  - read a number from the data storage     \n"
+    "    quit  - exit the program                        \n"
+    "----------------------------------------------------\n"
+    "   wil has reserved some storage :>                 \n"
+    "----------------------------------------------------\n");
+  while ( 1 )
+  {
+    printf("Input command: ");
+    number = 1;
+    fgets(s, 20, stdin);
+    s[strlen(s) - 1] = 0;
+    if ( !memcmp(s, "store", 5u) )
+    {
+      number = store_number((int)v6);
+      goto LABEL_13;
+    }
+    if ( !memcmp(s, "read", 4u) )
+    {
+      number = read_number((int)v6);
+      goto LABEL_13;
+    }
+    if ( !memcmp(s, "quit", 4u) )
+      return 0;
+LABEL_13:
+    if ( number )
+      printf(" Failed to do %s command\n", s);
+    else
+      printf(" Completed %s command successfully\n", s);
+    *(_DWORD *)s = 0;
+    v9 = 0;
+    v10 = 0;
+    v11 = 0;
+    v12 = 0;
+  }
 }
