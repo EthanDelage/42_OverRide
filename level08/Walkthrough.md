@@ -18,6 +18,7 @@ The trick is to create a simlink pointing to the `.pass` file in order to be abl
 ## Commands
  
 ```bash
+chmod 777 .
 ln -s ../level09/.pass test
 ./level08 test
 cat ./backups/test

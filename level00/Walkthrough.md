@@ -9,5 +9,5 @@ This is a simple exploit where the user input needs to be equal to `0x149c`. To 
 ## Commands
 
 ```bash
-(python -c "print(int('0x149c', 16))"; cat /home/users/level01/.pass) | ./level00
+(python -c "print(int('0x149c', 16))"; echo "cat /home/users/level01/.pass") | ./level00
 ```
