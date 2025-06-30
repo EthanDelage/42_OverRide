@@ -82,7 +82,7 @@ int decrypt(int value) {
         buf[index] ^= value;
         index++;
     }
-    if (strcmp(congrat, buf) {
+    if (strcmp(congrat, buf)) {
         return system("/bin/sh");
     } else {
         return puts("\nInvalid Password");

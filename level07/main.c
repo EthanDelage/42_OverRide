@@ -8,7 +8,7 @@ int __cdecl store_number(int a1)
   unum = get_unum();
   printf(" Index: ");
   v3 = get_unum();
-  if ( v3 == 3 * (v3 / 3) || HIBYTE(unum) == 183 )
+  if ( v3 % 3 == 0 )
   {
     puts(" *** ERROR! ***");
     puts("   This index is reserved for wil!");

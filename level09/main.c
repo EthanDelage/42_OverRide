@@ -5,7 +5,7 @@ int main(void) {
 }
 
 void handle_msg(void) {
-  undefined local_c8 [140];
+  undefined1 local_c8 [140];
   undefined8 local_3c;
   undefined8 local_34;
   undefined8 local_2c;

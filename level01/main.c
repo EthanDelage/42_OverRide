@@ -7,7 +7,7 @@ void main(void) {
     memset(buf, '\0', 64);
     puts("********* ADMIN LOGIN PROMPT *********");
     printf("Enter Username: ");
-    fgets(a_user_name, 0x100, stdin);
+    fgets(a_user_name, 256, stdin);
     boolean = verify_user_name();
     if (boolean == 0) {
         puts("Enter Password: ");

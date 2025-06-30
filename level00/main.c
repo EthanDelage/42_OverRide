@@ -6,7 +6,7 @@ void main(void)
   puts("* \t     -Level00 -\t\t  *");
   puts("***********************************");
   printf("Password:");
-  __isoc99_scanf(&DAT_08048636,buf);
+  __isoc99_scanf("%d",buf);
   if (buf[0] == 0x149c) {
     puts("\nAuthenticated!");
     system("/bin/sh");
